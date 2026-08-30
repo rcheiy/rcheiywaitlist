@@ -4,6 +4,7 @@
  */
 import { FormEvent, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 type ContactMethod = "email" | "phone";
 
@@ -12,6 +13,10 @@ export default function Home() {
   const [contact, setContact] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const submitMutation = trpc.waitlist.submit.useMutation({
+    onSuccess: () => setSubmitted(true),
+    onError: (mutationError) => setError(mutationError.message || "Something went wrong. Please try again."),
+  });
 
   const placeholder = method === "email" ? "you@email.com" : "Your phone number";
 
@@ -23,8 +28,9 @@ export default function Home() {
 
   function submitWaitlist(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const normalizedPhone = contact.trim().replace(/[^+\d]/g, "");
     const emailIsValid = /^\S+@\S+\.\S+$/.test(contact.trim());
-    const phoneIsValid = /^[+\d][\d\s().-]{6,}$/.test(contact.trim());
+    const phoneIsValid = /^[+\d][\d]{6,}$/.test(normalizedPhone);
     const isValid = method === "email" ? emailIsValid : phoneIsValid;
 
     if (!isValid) {
@@ -33,7 +39,7 @@ export default function Home() {
     }
 
     setError("");
-    setSubmitted(true);
+    submitMutation.mutate({ method, contact: contact.trim() });
   }
 
   return (
@@ -84,10 +90,10 @@ export default function Home() {
                     onChange={(event) => { setContact(event.target.value); setError(""); }}
                     placeholder={placeholder}
                     aria-invalid={Boolean(error)}
-                    aria-describedby={error ? "contact-error" : "contact-note"}
+                    aria-describedby={error ? "contact-error" : undefined}
                   />
-                  <button type="submit" className="join-button" aria-label="Join the waitlist">
-                    <span>JOIN</span><ArrowRight aria-hidden="true" />
+                  <button type="submit" className="join-button" aria-label="Join the waitlist" disabled={submitMutation.isPending}>
+                    <span>{submitMutation.isPending ? "SENDING" : "JOIN"}</span><ArrowRight aria-hidden="true" />
                   </button>
                 </div>
                 {error ? <p id="contact-error" className="form-error" role="alert">{error}</p> : null}
@@ -106,18 +112,13 @@ export default function Home() {
         </section>
 
         <div className="orb-composition" aria-hidden="true">
-          <span className="orbit orbit-one" />
-          <span className="orbit orbit-two" />
           <img className="hero-orb" src="/manus-storage/rose-orb-hero_f12b5070.png" alt="" />
-
         </div>
 
         {/* Removed material card per request */}
       </main>
 
-      <footer className="page-footer">
-        <p>© 2026 THE FIRST EDIT</p>
-      </footer>
+
     </div>
   );
 }
