@@ -3,7 +3,7 @@
  * The page intentionally uses a left-led editorial spread with a cropped sculpture at the right edge.
  */
 import { FormEvent, useState } from "react";
-import { ArrowRight, Check, Circle, Sparkles } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 type ContactMethod = "email" | "phone";
 
@@ -41,25 +41,15 @@ export default function Home() {
       <div className="page-grain" aria-hidden="true" />
 
       <header className="masthead">
-        <a className="brand-lockup" href="#top" aria-label="The First Edit home">
-          <img src="/manus-storage/petal-symbol_4213f8be.png" alt="" className="brand-symbol" />
-          <span>THE FIRST EDIT</span>
-        </a>
-        <p className="masthead-status"><span className="status-dot" />EST. SOON</p>
+        {/* Removed brand lockup and status per request */}
       </header>
 
       <main id="top" className="editorial-stage">
-        <aside className="margin-note note-release" aria-label="Release note">
-          <span className="note-number">01</span>
-          <p>PRIVATE<br />RELEASE</p>
-          <span className="note-line" />
-          <p className="note-small">JOIN THE LIST<br />FOR FIRST ACCESS</p>
-        </aside>
+        {/* Removed margin note per request */}
 
         <section className="hero-copy" aria-labelledby="waitlist-title">
-          <div className="eyebrow"><Circle aria-hidden="true" /> COLLECTION 01 — IN THE WORKS</div>
-          <h1 id="waitlist-title">The first look<br /><em>is almost yours.</em></h1>
-          <p className="intro-copy">A considered wardrobe is taking shape. Leave a detail, and we’ll send the release directly to you.</p>
+          <div className="eyebrow">COLLECTION 01</div>
+          <h1 id="waitlist-title">The <span className="headline-first"><span className="first-letter">f</span>irst</span> look<br /><em>is almost here.</em></h1>
 
           <div className="waitlist-panel">
             {!submitted ? (
@@ -100,7 +90,7 @@ export default function Home() {
                     <span>JOIN</span><ArrowRight aria-hidden="true" />
                   </button>
                 </div>
-                {error ? <p id="contact-error" className="form-error" role="alert">{error}</p> : <p id="contact-note" className="form-note">One launch note. Nothing else.</p>}
+                {error ? <p id="contact-error" className="form-error" role="alert">{error}</p> : null}
               </form>
             ) : (
               <div className="success-state" role="status">
@@ -119,19 +109,14 @@ export default function Home() {
           <span className="orbit orbit-one" />
           <span className="orbit orbit-two" />
           <img className="hero-orb" src="/manus-storage/rose-orb-hero_f12b5070.png" alt="" />
-          <div className="orb-caption"><Sparkles aria-hidden="true" /><span>SOFT SIGNAL<br />#F39BE2</span></div>
+
         </div>
 
-        <aside className="material-card" aria-label="Material note">
-          <div className="material-image-wrap"><img src="/manus-storage/fabric-note_69174b7c.png" alt="A blush organza fabric detail" className="material-image" /></div>
-          <div className="material-copy"><span>STUDIO NOTE</span><p>Made to be<br />worn into.</p></div>
-          <img src="/manus-storage/pink-swatch_52896b7f.png" alt="" className="material-swatch" />
-        </aside>
+        {/* Removed material card per request */}
       </main>
 
       <footer className="page-footer">
         <p>© 2026 THE FIRST EDIT</p>
-        <p>FOR THE ONES WHO ARRIVE EARLY</p>
       </footer>
     </div>
   );
