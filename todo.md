@@ -1,7 +1,7 @@
-# Rcheiy asset and navigation revision
+# Rcheiy copy and interaction revision
 
-- [x] Inspect Drive access and locate the supplied brand assets
-- [x] Update Virginia, RY, FlthyMrkt logo, and blank-piece visuals
-- [x] Simplify header, fashion, footer, and project labels
-- [x] Add project and song destination links
-- [x] Run tests and verify the revised preview
+- [x] Restore the original opening and update project copy
+- [x] Change Music chapter label and make album artwork clickable
+- [x] Add the top-center button and remove the requested header text
+- [x] Place Virginia text inside the state illustration
+- [x] Run checks and verify the revised preview

@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
-import { ArrowDown, ArrowUpRight, Check, Instagram, Mail, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight, Check, Instagram, Mail, X } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
 type ProjectId = "flthymrkt" | "top-seller" | "blank-piece" | "extra-pz" | "drake" | "magic-city-tana";
@@ -21,8 +21,8 @@ const fashionProjects: Project[] = [
     id: "flthymrkt",
     number: "2.1",
     title: "FlthyMrkt",
-    subtitle: "brand direction / logo system",
-    description: "FlthyMrkt / logo and blank-piece direction.",
+    subtitle: "vintage / luxury showroom",
+    description: "FlthyMrkt is a vintage and luxury online store that will become an in-person showroom. I have been building it by collecting some of the hardest clothes to get your hands on in the world — pieces worn by rappers, actors, and athletes.",
     image: "/manus-storage/flthymrkt_logo_dcdd358e.png",
     href: "https://flthymrkt.com",
   },
@@ -30,9 +30,9 @@ const fashionProjects: Project[] = [
     id: "top-seller",
     number: "2.2",
     title: "Top seller in my home town",
-    subtitle: "a local ambition",
-    description: "Virginia / home town study.",
-    image: "/manus-storage/virginia-handdrawn_dc02c805.svg",
+    subtitle: "ambition",
+    description: "",
+    image: "/manus-storage/virginia-handdrawn_e924cb2a.svg",
     href: "https://www.virginia.gov/",
   },
   {
@@ -107,16 +107,15 @@ export default function Home() {
     <div className={`portfolio-shell${contactOpen ? " drawer-is-open" : ""}`}>
       <div className="paper-noise" aria-hidden="true" />
       <header className="portfolio-header">
-        <div className="header-credit">created by 43rf</div>
+        <button className="header-home" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>top <ArrowUp aria-hidden="true" /></button>
         <button className="header-index" type="button" onClick={() => document.getElementById("contents")?.scrollIntoView({ behavior: "smooth" })}>Menu <ArrowDown aria-hidden="true" /></button>
       </header>
 
       <main id="top" className="portfolio-main">
         <section className="book-spread intro-spread" id="about" aria-labelledby="intro-title">
           <div className="book-page page-left">
-            <p className="page-kicker">Rcheiy</p>
-            <h1 id="intro-title">Rcheiy<br /><em>Artist's Book as an Unintuitive Experience</em></h1>
-            <p className="intro-note">In the era of over explaining, I prefer to focus on experimentation.<br /><br />It may be confusing at first, but just do what you would do on any website — move your cursor over different areas, scroll and click.<br /><br />You'll figure it out.</p>
+            <h1 id="intro-title">we're remastering<br /><em>the way it feels.</em></h1>
+            <p className="intro-note">It may be confusing at first, but just do what you would do on any website — move your cursor over different areas, scroll and click.<br /><br />You'll figure it out.</p>
             <div className="intro-footer"><span>01 / 04</span><span>Virginia, USA</span></div>
           </div>
           <div className="book-page page-right intro-image-page"><img className="ry-logo-image" src="/manus-storage/RY-PFP_1509d341.png" alt="RY logo" /><span className="folio-number">01</span></div>
@@ -127,14 +126,14 @@ export default function Home() {
           <nav className="contents-list" aria-label="Portfolio contents">
             <a href="#about" className="toc-row toc-section-link"><span>1.</span><strong>About</strong></a>
             <div className="toc-group"><a href="#fashion" className="toc-row toc-section-link"><span>2.</span><strong>Fashion Projects</strong></a>{fashionProjects.map((project) => <a className="toc-row toc-project" href={project.href} target="_blank" rel="noreferrer" key={project.id}><span>{project.number}</span><strong>{project.title}</strong><ArrowUpRight aria-hidden="true" /></a>)}</div>
-            <div className="toc-group"><a href="#music" className="toc-row toc-section-link"><span>3.</span><strong>Music Projects</strong></a>{musicProjects.map((project) => <a className="toc-row toc-project" href={project.href} target="_blank" rel="noreferrer" key={project.id}><span>{project.number}</span><strong>{project.title}</strong><ArrowUpRight aria-hidden="true" /></a>)}</div>
+            <div className="toc-group"><a href="#music" className="toc-row toc-section-link"><span>3.</span><strong>Music</strong></a>{musicProjects.map((project) => <a className="toc-row toc-project" href={project.href} target="_blank" rel="noreferrer" key={project.id}><span>{project.number}</span><strong>{project.title}</strong><ArrowUpRight aria-hidden="true" /></a>)}</div>
             <div className="toc-group"><a href="#contact" className="toc-row toc-section-link"><span>4.</span><strong>Contact</strong></a>{contactLinks.map(({ number, label, href, icon: Icon }) => <a className="toc-row toc-project external-link" href={href} target="_blank" rel="noreferrer" key={number}><span>{number}</span><strong>{label}</strong><Icon aria-hidden="true" /></a>)}<button className="toc-row toc-project contact-trigger" type="button" onClick={openContact}><span>4.3</span><strong>contact here</strong><ArrowUpRight aria-hidden="true" /></button></div>
           </nav>
         </section>
 
         <section className="chapter-intro" id="fashion" aria-labelledby="fashion-title"><span className="chapter-number">02</span><div><p className="page-kicker">chapter two</p><h2 id="fashion-title">Fashion<br /><em>Projects</em></h2></div></section>
         {fashionProjects.map((project) => <ProjectSpread key={project.id} project={project} active={selectedProject === project.id} onOpen={() => setSelectedProject(project.id)} />)}
-        <section className="chapter-intro" id="music" aria-labelledby="music-title"><span className="chapter-number">03</span><div><p className="page-kicker">chapter three</p><h2 id="music-title">Music<br /><em>Projects</em></h2></div><p>Cover studies, references, and the visual temperature of a song before anyone presses play.</p></section>
+        <section className="chapter-intro" id="music" aria-labelledby="music-title"><span className="chapter-number">03</span><div><p className="page-kicker">chapter three</p><h2 id="music-title">Music</h2></div><p>Cover studies, references, and the visual temperature of a song before anyone presses play.</p></section>
         {musicProjects.map((project) => <ProjectSpread key={project.id} project={project} active={selectedProject === project.id} onOpen={() => setSelectedProject(project.id)} />)}
 
         <section className="contact-spread" id="contact" aria-labelledby="contact-title"><div className="contact-page-left"><span className="chapter-number">04</span><p className="page-kicker">chapter four</p><h2 id="contact-title">4. Contact<br /><em>here.</em></h2><p>If you have a project, a garment, a song, or a reason to say hello, contact here.</p></div><div className="contact-page-right">{contactLinks.map(({ number, label, href, icon: Icon }) => <a className="contact-link-card" href={href} target="_blank" rel="noreferrer" key={number}><span>{number}</span><strong>{label}</strong><Icon aria-hidden="true" /></a>)}<button className="contact-link-card contact-link-button" type="button" onClick={openContact}><span>4.3</span><strong>contact here</strong><ArrowUpRight aria-hidden="true" /></button><p className="contact-footnote">your words stay on this site until the right conversation starts.</p></div></section>
@@ -152,5 +151,5 @@ export default function Home() {
 }
 
 function ProjectSpread({ project, active, onOpen }: { project: Project; active: boolean; onOpen: () => void }) {
-  return <section className={`project-spread${active ? " is-active" : ""}`} id={project.id} aria-labelledby={`${project.id}-title`}><div className="project-copy"><a className="project-index" href={project.href} target="_blank" rel="noreferrer" aria-label={`Open ${project.title}`}><span>{project.number}</span><ArrowUpRight aria-hidden="true" /></a><p className="page-kicker">{project.subtitle}</p><h3 id={`${project.id}-title`}>{project.title}</h3><p>{project.description}</p><span className="project-status">{project.image ? "cover art" : project.id === "blank-piece" ? "image to be added" : "direction / placeholder spread"}</span></div><div className={`project-visual visual-${project.id} ${project.tone ? `tone-${project.tone}` : ""}`} aria-label={`${project.title} project visual`}>{project.image ? <img className={`project-image project-image-${project.id}`} src={project.image} alt={`${project.title} project visual`} /> : null}<span className="visual-folio">{project.number}</span></div></section>;
+  return <section className={`project-spread${active ? " is-active" : ""}`} id={project.id} aria-labelledby={`${project.id}-title`}><div className="project-copy"><a className="project-index" href={project.href} target="_blank" rel="noreferrer" aria-label={`Open ${project.title}`}><span>{project.number}</span><ArrowUpRight aria-hidden="true" /></a><p className="page-kicker">{project.subtitle}</p><h3 id={`${project.id}-title`}>{project.title}</h3><p>{project.description}</p><span className="project-status">{project.image ? "cover art" : project.id === "blank-piece" ? "image to be added" : "direction / placeholder spread"}</span></div><div className={`project-visual visual-${project.id} ${project.tone ? `tone-${project.tone}` : ""}`} aria-label={`${project.title} project visual`}>{project.image ? <a className="project-image-link" href={project.href} target="_blank" rel="noreferrer" aria-label={`Open ${project.title}`}><img className={`project-image project-image-${project.id}`} src={project.image} alt={`${project.title} project visual`} /></a> : null}<span className="visual-folio">{project.number}</span></div></section>;
 }
