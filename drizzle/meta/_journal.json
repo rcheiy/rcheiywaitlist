@@ -8,6 +8,13 @@
       "when": 1788073325862,
       "tag": "0000_lethal_yellowjacket",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1791257415806,
+      "tag": "0001_futuristic_nick_fury",
+      "breakpoints": true
     }
   ]
 }
