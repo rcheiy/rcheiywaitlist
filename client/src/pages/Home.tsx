@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowDown, ArrowUp, ArrowUpRight, Check, Instagram, Mail, X } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
@@ -70,6 +70,14 @@ export default function Home() {
   const [trap, setTrap] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => setShowTop(window.scrollY > window.innerHeight * 0.85);
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
 
   const submitMutation = trpc.waitlist.submit.useMutation({
     onSuccess: () => { setSubmitted(true); setError(""); },
@@ -107,14 +115,13 @@ export default function Home() {
     <div className={`portfolio-shell${contactOpen ? " drawer-is-open" : ""}`}>
       <div className="paper-noise" aria-hidden="true" />
       <header className="portfolio-header">
-        <button className="header-home" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>top <ArrowUp aria-hidden="true" /></button>
         <button className="header-index" type="button" onClick={() => document.getElementById("contents")?.scrollIntoView({ behavior: "smooth" })}>Menu <ArrowDown aria-hidden="true" /></button>
       </header>
 
       <main id="top" className="portfolio-main">
         <section className="book-spread intro-spread" id="about" aria-labelledby="intro-title">
           <div className="book-page page-left">
-            <h1 id="intro-title">we're remastering<br /><em>the way it feels.</em></h1>
+            <h1 id="intro-title">About me</h1>
             <p className="intro-note">It may be confusing at first, but just do what you would do on any website — move your cursor over different areas, scroll and click.<br /><br />You'll figure it out.</p>
             <div className="intro-footer"><span>01 / 04</span><span>Virginia, USA</span></div>
           </div>
@@ -138,6 +145,10 @@ export default function Home() {
 
         <section className="contact-spread" id="contact" aria-labelledby="contact-title"><div className="contact-page-left"><span className="chapter-number">04</span><p className="page-kicker">chapter four</p><h2 id="contact-title">4. Contact<br /><em>here.</em></h2><p>If you have a project, a garment, a song, or a reason to say hello, contact here.</p></div><div className="contact-page-right">{contactLinks.map(({ number, label, href, icon: Icon }) => <a className="contact-link-card" href={href} target="_blank" rel="noreferrer" key={number}><span>{number}</span><strong>{label}</strong><Icon aria-hidden="true" /></a>)}<button className="contact-link-card contact-link-button" type="button" onClick={openContact}><span>4.3</span><strong>contact here</strong><ArrowUpRight aria-hidden="true" /></button><p className="contact-footnote">your words stay on this site until the right conversation starts.</p></div></section>
       </main>
+
+      <button className={`scroll-top${showTop ? " is-visible" : ""}`} type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top" tabIndex={showTop ? 0 : -1}>
+        <ArrowUp aria-hidden="true" />
+      </button>
 
       
       <div className={`drawer-backdrop${contactOpen ? " is-visible" : ""}`} onClick={closeContact} aria-hidden="true" />
