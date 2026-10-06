@@ -1,7 +1,7 @@
-# Rcheiy portfolio revision
+# Rcheiy asset and navigation revision
 
-- [ ] Inspect the supplied content and current reference-style implementation
-- [ ] Tune the layout and interaction closer to the reference site
-- [ ] Replace music text cards with album-cover artwork or clearly labeled pending art
-- [ ] Change contact wording to contact here
-- [ ] Run tests and verify the revised preview
+- [x] Inspect Drive access and locate the supplied brand assets
+- [x] Update Virginia, RY, FlthyMrkt logo, and blank-piece visuals
+- [x] Simplify header, fashion, footer, and project labels
+- [x] Add project and song destination links
+- [x] Run tests and verify the revised preview

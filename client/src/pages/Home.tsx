@@ -13,6 +13,7 @@ type Project = {
   description: string;
   tone?: string;
   image?: string;
+  href?: string;
 };
 
 const fashionProjects: Project[] = [
@@ -21,28 +22,34 @@ const fashionProjects: Project[] = [
     number: "2.1",
     title: "FlthyMrkt",
     subtitle: "brand direction / logo system",
-    description: "A mark for the market before the market exists. FlthyMrkt is built around the tension between a clean silhouette and the mess that makes a place feel lived in.",
+    description: "FlthyMrkt / logo and blank-piece direction.",
+    image: "/manus-storage/flthymrkt_logo_dcdd358e.png",
+    href: "https://flthymrkt.com",
   },
   {
     id: "top-seller",
     number: "2.2",
     title: "Top seller in my home town",
     subtitle: "a local ambition",
-    description: "I want this to be the piece people point to when they talk about where I am from. Virginia is home: the roads, the heat, the quiet confidence, and the feeling that the best thing in the room does not need to announce itself. The goal is simple and difficult at the same time — make something that feels specific enough to belong to my city, but universal enough to become the top seller wherever it travels. I want the garment to carry that story without turning it into a costume: strong construction, a recognizable shape, and a graphic language that feels like it was found rather than forced. If it sells, it should sell because the idea is clear and the piece earns its place in somebody’s rotation.",
+    description: "Virginia / home town study.",
+    image: "/manus-storage/virginia-handdrawn_dc02c805.svg",
+    href: "https://www.virginia.gov/",
   },
   {
     id: "blank-piece",
     number: "2.3",
     title: "Design a top selling blank piece",
     subtitle: "blank / in progress",
-    description: "A quiet base with enough shape to carry everything that comes next. The final blank-piece photography will live here.",
+    description: "Design something one of a kind.",
+    image: "/manus-storage/m-Photoroom_41dfdba4.png",
+    href: "https://www.instagram.com/flthymrkt/",
   },
 ];
 
 const musicProjects: Project[] = [
-  { id: "extra-pz", number: "3.1", title: "Extra by pz", subtitle: "Extra (Extra) / 2026", description: "Single cover.", image: "/manus-storage/pz-extra_ba3f6fd0.jpg" },
-  { id: "drake", number: "3.2", title: "Drake / Take Care", subtitle: "Take Care / 2011", description: "Album cover reference.", image: "/manus-storage/drake-take-care_f8cb750b.jpg" },
-  { id: "magic-city-tana", number: "3.3", title: "Magic City tana", subtitle: "Magic City / 2025", description: "Single cover.", image: "/manus-storage/tana-magic-city_7dfdb984.jpg" },
+  { id: "extra-pz", number: "3.1", title: "Extra by pz", subtitle: "Extra (Extra) / 2026", description: "Single cover.", image: "/manus-storage/pz-extra_ba3f6fd0.jpg", href: "https://music.apple.com/us/album/extra-extra-single/6776867135" },
+  { id: "drake", number: "3.2", title: "Drake / Take Care", subtitle: "Take Care / 2011", description: "Album cover reference.", image: "/manus-storage/drake-take-care_f8cb750b.jpg", href: "https://music.apple.com/us/album/take-care-deluxe-version/1440642493" },
+  { id: "magic-city-tana", number: "3.3", title: "Magic City tana", subtitle: "Magic City / 2025", description: "Single cover.", image: "/manus-storage/tana-magic-city_7dfdb984.jpg", href: "https://music.apple.com/us/album/magic-city-single/1846677960" },
 ];
 
 const contactLinks = [
@@ -100,8 +107,7 @@ export default function Home() {
     <div className={`portfolio-shell${contactOpen ? " drawer-is-open" : ""}`}>
       <div className="paper-noise" aria-hidden="true" />
       <header className="portfolio-header">
-        <a className="brand-mark" href="#top" aria-label="Rcheiy home"><span className="brand-monogram">RY</span><span className="brand-word">rcheiy</span></a>
-        <div className="header-caption">created for rcheiy / 01</div>
+        <div className="header-credit">created by 43rf</div>
         <button className="header-index" type="button" onClick={() => document.getElementById("contents")?.scrollIntoView({ behavior: "smooth" })}>Menu <ArrowDown aria-hidden="true" /></button>
       </header>
 
@@ -111,22 +117,22 @@ export default function Home() {
             <p className="page-kicker">Rcheiy</p>
             <h1 id="intro-title">Rcheiy<br /><em>Artist's Book as an Unintuitive Experience</em></h1>
             <p className="intro-note">In the era of over explaining, I prefer to focus on experimentation.<br /><br />It may be confusing at first, but just do what you would do on any website — move your cursor over different areas, scroll and click.<br /><br />You'll figure it out.</p>
-            <div className="intro-footer"><span>01 / 04</span><a href="https://www.instagram.com/43rf/" target="_blank" rel="noreferrer">Created by 43rf</a></div>
+            <div className="intro-footer"><span>01 / 04</span><span>Virginia, USA</span></div>
           </div>
-          <div className="book-page page-right intro-image-page"><div className="ry-field" aria-hidden="true"><span className="ry-field-small">RY</span><span className="ry-field-large">R<br />Y</span><span className="ry-field-note">rcheiy / remastering</span></div><span className="folio-number">01</span></div>
+          <div className="book-page page-right intro-image-page"><img className="ry-logo-image" src="/manus-storage/RY-PFP_1509d341.png" alt="RY logo" /><span className="folio-number">01</span></div>
         </section>
 
         <section className="contents-spread" id="contents" aria-labelledby="contents-title">
           <div className="contents-intro"><p className="page-kicker">contents / click to open a spread</p><h2 id="contents-title">Rcheiy<br /><em>portfolio.</em></h2><p>Not a catalog. More like a desk with the good pages left open.</p><span className="scroll-cue"><ArrowDown aria-hidden="true" /> scroll / select</span></div>
           <nav className="contents-list" aria-label="Portfolio contents">
             <a href="#about" className="toc-row toc-section-link"><span>1.</span><strong>About</strong></a>
-            <div className="toc-group"><a href="#fashion" className="toc-row toc-section-link"><span>2.</span><strong>Fashion Projects</strong></a>{fashionProjects.map((project) => <button className={`toc-row toc-project${selectedProject === project.id ? " is-selected" : ""}`} type="button" key={project.id} onClick={() => openProject(project.id)}><span>{project.number}</span><strong>{project.title}</strong></button>)}</div>
-            <div className="toc-group"><a href="#music" className="toc-row toc-section-link"><span>3.</span><strong>Music Projects</strong></a>{musicProjects.map((project) => <button className={`toc-row toc-project${selectedProject === project.id ? " is-selected" : ""}`} type="button" key={project.id} onClick={() => openProject(project.id)}><span>{project.number}</span><strong>{project.title}</strong></button>)}</div>
+            <div className="toc-group"><a href="#fashion" className="toc-row toc-section-link"><span>2.</span><strong>Fashion Projects</strong></a>{fashionProjects.map((project) => <a className="toc-row toc-project" href={project.href} target="_blank" rel="noreferrer" key={project.id}><span>{project.number}</span><strong>{project.title}</strong><ArrowUpRight aria-hidden="true" /></a>)}</div>
+            <div className="toc-group"><a href="#music" className="toc-row toc-section-link"><span>3.</span><strong>Music Projects</strong></a>{musicProjects.map((project) => <a className="toc-row toc-project" href={project.href} target="_blank" rel="noreferrer" key={project.id}><span>{project.number}</span><strong>{project.title}</strong><ArrowUpRight aria-hidden="true" /></a>)}</div>
             <div className="toc-group"><a href="#contact" className="toc-row toc-section-link"><span>4.</span><strong>Contact</strong></a>{contactLinks.map(({ number, label, href, icon: Icon }) => <a className="toc-row toc-project external-link" href={href} target="_blank" rel="noreferrer" key={number}><span>{number}</span><strong>{label}</strong><Icon aria-hidden="true" /></a>)}<button className="toc-row toc-project contact-trigger" type="button" onClick={openContact}><span>4.3</span><strong>contact here</strong><ArrowUpRight aria-hidden="true" /></button></div>
           </nav>
         </section>
 
-        <section className="chapter-intro" id="fashion" aria-labelledby="fashion-title"><span className="chapter-number">02</span><div><p className="page-kicker">chapter two</p><h2 id="fashion-title">Fashion<br /><em>Projects</em></h2></div><p>Three directions for the things people wear until they become part of the story.</p></section>
+        <section className="chapter-intro" id="fashion" aria-labelledby="fashion-title"><span className="chapter-number">02</span><div><p className="page-kicker">chapter two</p><h2 id="fashion-title">Fashion<br /><em>Projects</em></h2></div></section>
         {fashionProjects.map((project) => <ProjectSpread key={project.id} project={project} active={selectedProject === project.id} onOpen={() => setSelectedProject(project.id)} />)}
         <section className="chapter-intro" id="music" aria-labelledby="music-title"><span className="chapter-number">03</span><div><p className="page-kicker">chapter three</p><h2 id="music-title">Music<br /><em>Projects</em></h2></div><p>Cover studies, references, and the visual temperature of a song before anyone presses play.</p></section>
         {musicProjects.map((project) => <ProjectSpread key={project.id} project={project} active={selectedProject === project.id} onOpen={() => setSelectedProject(project.id)} />)}
@@ -134,7 +140,7 @@ export default function Home() {
         <section className="contact-spread" id="contact" aria-labelledby="contact-title"><div className="contact-page-left"><span className="chapter-number">04</span><p className="page-kicker">chapter four</p><h2 id="contact-title">4. Contact<br /><em>here.</em></h2><p>If you have a project, a garment, a song, or a reason to say hello, contact here.</p></div><div className="contact-page-right">{contactLinks.map(({ number, label, href, icon: Icon }) => <a className="contact-link-card" href={href} target="_blank" rel="noreferrer" key={number}><span>{number}</span><strong>{label}</strong><Icon aria-hidden="true" /></a>)}<button className="contact-link-card contact-link-button" type="button" onClick={openContact}><span>4.3</span><strong>contact here</strong><ArrowUpRight aria-hidden="true" /></button><p className="contact-footnote">your words stay on this site until the right conversation starts.</p></div></section>
       </main>
 
-      <footer className="portfolio-footer"><span>Rcheiy / we're remastering</span><span>scroll slowly / 2026</span></footer>
+      
       <div className={`drawer-backdrop${contactOpen ? " is-visible" : ""}`} onClick={closeContact} aria-hidden="true" />
       <aside className={`contact-drawer${contactOpen ? " is-open" : ""}`} aria-label="Contact Rcheiy" aria-hidden={!contactOpen}>
         <div className="drawer-topline"><div><span className="page-kicker">4.3 / contact here</span><h2>say what<br /><em>you need.</em></h2></div><button className="drawer-close" type="button" onClick={closeContact} aria-label="Close contact panel"><X aria-hidden="true" /></button></div>
@@ -146,5 +152,5 @@ export default function Home() {
 }
 
 function ProjectSpread({ project, active, onOpen }: { project: Project; active: boolean; onOpen: () => void }) {
-  return <section className={`project-spread${active ? " is-active" : ""}`} id={project.id} aria-labelledby={`${project.id}-title`}><div className="project-copy"><button className="project-index" type="button" onClick={onOpen} aria-label={`Open ${project.title}`}><span>{project.number}</span><ArrowUpRight aria-hidden="true" /></button><p className="page-kicker">{project.subtitle}</p><h3 id={`${project.id}-title`}>{project.title}</h3><p>{project.description}</p><span className="project-status">{project.image ? "cover art" : project.id === "blank-piece" ? "image to be added" : "direction / placeholder spread"}</span></div><div className={`project-visual visual-${project.id} ${project.tone ? `tone-${project.tone}` : ""}`} aria-label={`${project.title} cover art`}>{project.id === "flthymrkt" ? <div className="flthy-logo"><span>FLTHY</span><strong>MRKT</strong></div> : null}{project.id === "top-seller" ? <div className="virginia-card"><span>VIRGINIA</span><strong>TOP SELLER<br />IN MY<br />HOME TOWN</strong><small>VA / 00</small></div> : null}{project.id === "blank-piece" ? <div className="blank-piece-card"><div className="blank-neck" /><span>BLANK / 01</span></div> : null}{project.image ? <img className="album-cover" src={project.image} alt={`${project.title} cover art`} /> : null}<span className="visual-folio">{project.number}</span></div></section>;
+  return <section className={`project-spread${active ? " is-active" : ""}`} id={project.id} aria-labelledby={`${project.id}-title`}><div className="project-copy"><a className="project-index" href={project.href} target="_blank" rel="noreferrer" aria-label={`Open ${project.title}`}><span>{project.number}</span><ArrowUpRight aria-hidden="true" /></a><p className="page-kicker">{project.subtitle}</p><h3 id={`${project.id}-title`}>{project.title}</h3><p>{project.description}</p><span className="project-status">{project.image ? "cover art" : project.id === "blank-piece" ? "image to be added" : "direction / placeholder spread"}</span></div><div className={`project-visual visual-${project.id} ${project.tone ? `tone-${project.tone}` : ""}`} aria-label={`${project.title} project visual`}>{project.image ? <img className={`project-image project-image-${project.id}`} src={project.image} alt={`${project.title} project visual`} /> : null}<span className="visual-folio">{project.number}</span></div></section>;
 }
